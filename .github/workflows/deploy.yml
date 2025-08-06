@@ -38,5 +38,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            sijosamdev/sijo-virtual-resume-docker:${{ steps.tag.outputs.tag }}
+            sijosamdev/sijo-virtual-resume-docker:latest
           platforms: linux/amd64
