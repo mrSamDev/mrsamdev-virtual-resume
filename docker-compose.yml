@@ -2,5 +2,5 @@ services:
   app:
     build: .
     ports:
-      - "3002:80" # Map host 3002 to container 80
+      - "3002:3002" # Both sides now match
     restart: always
