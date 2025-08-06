@@ -2,7 +2,5 @@ services:
   app:
     build: .
     ports:
-      - "3002:3002"
-    environment:
-      - PORT=3002
+      - "3002:80" # Map host 3002 to container 80
     restart: always
