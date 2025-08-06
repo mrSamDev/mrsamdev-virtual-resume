@@ -1,14 +1,17 @@
-# ---------- Builder ----------
-FROM node:20-alpine AS builder
+
+FROM node:lts-alpine AS builder
 WORKDIR /app
 
+# Install pnpm
+RUN corepack enable pnpm
+
 # Install only production dependencies first (caches better)
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --prod
 
 # Copy source & build
 COPY . .
-RUN npm run build   # assumes a `build` script that outputs to ./dist
+RUN pnpm run build   # assumes a `build` script that outputs to ./dist
 
 # ---------- Runtime ----------
 FROM nginx:stable-alpine

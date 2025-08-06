@@ -35,5 +35,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            sijosamdev/sijo-hono-docker-dockploy:${{ steps.tag.outputs.tag }}
+            sijosamdev/sijo-virtual-resume-docker:${{ steps.tag.outputs.tag }}
           platforms: linux/amd64

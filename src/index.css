@@ -1,367 +1,39 @@
 @import "tailwindcss";
 
-/* -----------------------------------------------------------------
-   Core colour palette – light & dark, with purple accent #a476ff
-   ----------------------------------------------------------------- */
-:root {
-  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@theme {
+  --color-gray-950: #1a1a1a;
+  --color-gray-800: #4a4a4a;
+  --color-gray-500: #8a8a8a;
+  --color-gray-200: #e5e5e5;
+  --color-gray-50: #fefefe;
+  --color-accent: #6366f1;
 
-  /* spacing token – change here if you want a different base gap */
-  --gap: 1rem;
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
 
-  /* Light theme */
-  --c-bg: #fafafa; /* page background */
-  --c-surface: #fff; /* cards, sections */
-  --c-primary: #222; /* main text */
-  --c-muted: #555; /* secondary text */
-  --c-accent: #a476ff; /* purple – used for chips, links, focus */
-  --c-border: #e0e0e0; /* subtle border */
-}
+  --font-size-2xl: 2.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-lg: 1.125rem;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
 
-/* Dark theme – toggled by adding .dark to <html> */
-.dark {
-  --c-bg: #111;
-  --c-surface: #1a1a1a;
-  --c-primary: #e4e4e4;
-  --c-muted: #bbb;
-  --c-accent: #a476ff; /* same purple works on dark */
-  --c-border: #333;
+  --line-height-tight: 1.2;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.5;
 }
 
-/* -----------------------------------------------------------------
-   Global layout
-   ----------------------------------------------------------------- */
-html,
-body,
-#root {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: var(--font-sans);
-  background: var(--c-bg);
-  color: var(--c-primary);
+/* Custom utilities for minimal design */
+.text-balance {
+  text-wrap: balance;
 }
 
-/* -----------------------------------------------------------------
-   Utility classes (hand‑crafted, not Tailwind)
-   ----------------------------------------------------------------- */
-.container {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: calc(var(--gap) * 2) var(--gap);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-/* Header */
-.header {
-  position: relative;
-  padding: calc(var(--gap) * 2) 0;
-}
-.meta {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: var(--gap);
-}
-.title-block {
-  max-width: 45ch;
-}
-.role {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.9rem;
-  color: var(--c-muted);
-}
-.role-marker {
-  color: var(--c-accent);
-}
-.name {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin: 0.3rem 0;
-}
-.summary {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--c-muted);
-}
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.8rem;
-}
-
-/* Card & Section */
-.card,
-.section {
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
-  border-radius: 0.8rem;
-  padding: calc(var(--gap) * 0.8);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover,
-.section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-}
-.title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--c-primary);
-}
-.subtitle {
-  font-size: 0.95rem;
-  color: var(--c-muted);
-  margin-top: 0.3rem;
-}
-.bullets {
-  margin: 0.8rem 0;
-  padding-left: 1.2rem;
-  color: var(--c-muted);
-}
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-/* Chips & Links – purple accent */
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.2rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #fff;
-  background: var(--c-accent);
-  border-radius: 0.4rem;
-  padding: 0.2rem 0.5rem;
-}
-.chip.subtle {
-  background: var(--c-muted);
-  color: #fff;
-}
-.soft-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  color: var(--c-primary);
-  border: 1px solid var(--c-border);
-  border-radius: 0.5rem;
-  padding: 0.3rem 0.7rem;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
-}
-.soft-link:hover,
-.soft-link:focus-visible {
-  background: var(--c-accent);
-  border-color: var(--c-accent);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-/* Theme toggle button */
-.theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  margin-left: var(--gap);
-  color: var(--c-primary);
-}
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--c-accent);
-  outline-offset: 2px;
-}
-
-/* Section header */
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-.section-header h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--c-primary);
-}
-.section-right {
-  margin-left: auto;
-}
-
-/* Divider */
-.divider {
-  height: 1px;
-  background: var(--c-border);
-  margin: 0.8rem 0;
-}
-
-/* Grid & Stack */
-.grid {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-.stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--c-muted);
-  margin-top: calc(var(--gap) * 2);
-}
-
-/* Animation */
-@keyframes in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(12px);
+/* Print optimization */
+@media print {
+  @page {
+    margin: 0.5in;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+
+  .print-hidden {
+    display: none;
   }
-}
-.animate-fade-up {
-  animation: in-up 0.6s ease forwards;
-}
-
-/* Accessibility focus outline */
-:focus-visible {
-  outline: 2px solid var(--c-accent);
-  outline-offset: 2px;
-}
-
-/* -----------------------------------------------------------------
-   Header – more structured & recognizable
-   ----------------------------------------------------------------- */
-.header {
-  background: var(--c-bg);
-  border-bottom: 1px solid var(--c-border);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-}
-.header-inner {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: calc(var(--gap) * 2) var(--gap);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-/* meta row (location / relocation) */
-.header-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-/* main area – title on the left, contacts on the right */
-.header-main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap);
-}
-
-/* on medium+ screens put title & contacts side‑by‑side */
-@media (min-width: 768px) {
-  .header-main {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: calc(var(--gap) * 2);
-  }
-}
-
-/* title block – unchanged except for a tiny margin tweak */
-.title-block {
-  flex: 1;
-}
-
-/* role line */
-.role {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.9rem;
-  color: var(--c-muted);
-}
-.role-marker {
-  color: var(--c-accent);
-}
-
-/* contact actions */
-.header-contact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-/* theme toggle button – a little larger for easier tap */
-.theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--c-primary);
-  padding: 0.2rem 0.4rem;
-}
-.theme-toggle:focus-visible {
-  outline: 2px solid var(--c-accent);
-  outline-offset: 2px;
-}
-
-/* -----------------------------------------------------------------
-   Existing utilities (unchanged) – kept for reference
-   ----------------------------------------------------------------- */
-/* ... keep the rest of your CSS (cards, sections, chips, etc.) ... */
-
-/* src/index.css – add at the bottom of the file */
-
-/* Splash overlay – full‑screen, centered */
-.splash {
-  position: fixed;
-  inset: 0;
-  background: var(--c-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999; /* above everything else */
-  animation: splash-fade 0.8s ease-out forwards;
-}
-
-/* Fade‑out after the component sets `display:none` */
-@keyframes splash-fade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Content – keep the same typography as the header */
-.splash-content {
-  text-align: center;
-  color: var(--c-primary);
-}
-.splash-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 0.4rem;
-}
-.splash-tagline {
-  font-size: 1rem;
-  color: var(--c-muted);
 }
