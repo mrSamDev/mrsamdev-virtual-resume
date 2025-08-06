@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export function Header() {
   const [isDark, setIsDark] = useState(() => {
@@ -7,12 +7,11 @@ export function Header() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
+  // Sync HTML class & localStorage whenever the mode changes
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
-
-  const toggle = () => setIsDark((p) => !p);
 
   return (
     <header className="header">
@@ -65,7 +64,7 @@ export function Header() {
             </a>
 
             {/* Theme toggle */}
-            <button className="theme-toggle" onClick={toggle} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
+            <button className="theme-toggle" onClick={() => setIsDark((p) => !p)} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
               {isDark ? "🌙" : "☀️"}
             </button>
           </nav>
