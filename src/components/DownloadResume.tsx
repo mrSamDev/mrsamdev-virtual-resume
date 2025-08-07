@@ -1,11 +1,10 @@
 const handleDownloadPDF = () => {
-  // Replace 'YOUR_FILE_ID' with your actual Google Drive file ID
-  const driveFileId = "YOUR_FILE_ID";
-  const downloadUrl = `https://drive.google.com/uc?export=download&id=${driveFileId}`;
+  const downloadUrl = `https://docs.google.com/document/d/129_znZkEIdG3b5r_DzQAIJFkBZL_0oI-w7O2DWRMJAc/edit?usp=sharing`;
 
   // Create a temporary link and trigger download
   const link = document.createElement("a");
   link.href = downloadUrl;
+  link.target = "_blank";
   link.download = "Sijo_Sam_Resume.pdf";
   document.body.appendChild(link);
   link.click();
